@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSCS 2B ANNOUNCE - Help in Society</title>
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="assets/js/config.js" defer></script>
+    <script src="assets/js/database.js" defer></script>
+    <script src="assets/js/ui.js" defer></script>
+    <script src="assets/js/app.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <h1>🤝 BSCS-2B ANNOUNCE</h1>
+        <p>For BISU Calape Only.</p>
+        <div id="auth-buttons" class="auth-buttons">
+            <button id="loginBtn">🔐 Admin Login</button>
+            <button id="logoutBtn" class="danger-button" hidden>Logout</button>
+        </div>
+    </header>
+
+    <main class="locked">
+        <section id="post-form" class="panel" hidden>
+            <h2>Post a New Announcement</h2>
+            <form id="helpForm">
+                <input type="text" id="title" placeholder="Title" required>
+                <textarea id="description" placeholder="Description..." required></textarea>
+                <select id="type">
+                    <option value="request">Type of Announcement</option>
+                    <option value="events">Events</option>
+                    <option value="academics">Academics</option>
+                    <option value="urgent">Urgent</option>
+                    <option value="general">General</option>
+                </select>
+                <select id="recipientPhone" required>
+                    <option value="" disabled selected>Select Recipient Number</option>
+                </select>
+                <input type="datetime-local" id="datetime" step="300" required>
+                <button type="submit">Send SMS</button>
+            </form>
+        </section>
+
+        <section id="phone-registration" class="panel" hidden>
+            <h3>📞 Admin Phone Directory</h3>
+            <form id="phoneForm">
+                <input type="tel" id="pNumber" placeholder="09... or +639..." required>
+                <button type="submit">Add Phone Number</button>
+            </form>
+            <div id="phoneList"></div>
+        </section>
+
+        <section id="posts" class="panel">
+            <h2>BISU CALAPE COMMUNITY</h2>
+            <div id="postsList"></div>
+        </section>
+    </main>
+
+    <div id="loginModal" class="modal is-open">
+        <div class="login-card">
+            <div class="login-icon">🔐</div>
+            <h3>Admin Access</h3>
+
+            <label for="username">USERNAME</label>
+            <input type="text" id="username" class="login-input" placeholder="Enter username">
+
+            <label for="password">PASSWORD</label>
+            <input type="password" id="password" class="login-input" placeholder="Enter password" autofocus>
+
+            <div class="modal-actions">
+                <button id="submitLogin" class="login-btn">
+                    <span class="btn-text">Login Access</span>
+                </button>
+                <button id="closeLogin" class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
