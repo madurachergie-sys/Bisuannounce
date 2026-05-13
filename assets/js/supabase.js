@@ -2,7 +2,7 @@
     window.App = window.App || {};
 
     window.App.supabaseEnv = {
-        url: "PASTE_YOUR_SUPABASE_PROJECT_URL_HERE",
-        anonKey: "PASTE_YOUR_SUPABASE_ANON_KEY_HERE"
+        url: "https://oosmxkeipttocaqbormv.supabase.co",
+        anonKey: "sb_publishable_IoN10tATOu89s4m1U0z1MQ_DL5Bu5UN"
     };
 })();
