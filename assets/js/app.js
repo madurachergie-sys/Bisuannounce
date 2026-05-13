@@ -333,12 +333,12 @@
             try {
                 if (editingPhoneIndex > -1) {
                     const idOrIndex = phones[editingPhoneIndex].id || editingPhoneIndex;
-                    await App.db.updatePhone(idOrIndex, { number });
+                    await App.db.updatePhone(idOrIndex, { number: cleanNum });
                     editingPhoneIndex = -1;
                     this.querySelector("button").textContent = "Add Phone Number";
                     App.ui.showNotification("📞 Phone Updated!", "success");
                 } else {
-                    await App.db.savePhone({ number });
+                    await App.db.savePhone({ number: cleanNum });
                     App.ui.showNotification("📞 Phone Registered!", "success");
                 }
 
@@ -356,24 +356,20 @@
         const loginModal = document.getElementById("loginModal");
         const authButtons = document.getElementById("auth-buttons");
 
+        localStorage.removeItem("isAdminLoggedIn");
         bindEvents();
         await refreshData();
 
-        if (!isAdmin()) {
-            mainEl.classList.remove("locked");
-            loginModal.classList.remove("is-open");
-            authButtons.hidden = false;
-            toggleAdminMode(false);
-        } else {
-            mainEl.classList.remove("locked");
-            loginModal.classList.remove("is-open");
-            authButtons.hidden = false;
-            toggleAdminMode(true);
-        }
+        mainEl.classList.remove("locked");
+        loginModal.classList.remove("is-open");
+        authButtons.hidden = false;
+        toggleAdminMode(false);
 
         if (!App.db.isSupabaseEnabled) {
             console.info("Supabase is not configured yet. The app is using localStorage fallback.");
         }
     });
 })();
+
+
 
