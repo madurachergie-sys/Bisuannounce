@@ -17,3 +17,15 @@ for (const entry of entries) {
     fs.cpSync(source, target, { recursive: true });
   }
 }
+
+const supabaseConfigPath = path.join(outDir, "assets", "js", "supabase.js");
+const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+
+if (fs.existsSync(supabaseConfigPath) && supabaseUrl && supabaseAnonKey) {
+  const supabaseConfig = `(function () {\n    window.App = window.App || {};\n\n    window.App.supabaseEnv = {\n        url: ${JSON.stringify(supabaseUrl)},\n        anonKey: ${JSON.stringify(supabaseAnonKey)}\n    };\n})();\n`;
+  fs.writeFileSync(supabaseConfigPath, supabaseConfig);
+  console.log("Supabase config injected into public/assets/js/supabase.js");
+} else {
+  console.warn("Supabase environment variables are not set. App will use localStorage fallback.");
+}
