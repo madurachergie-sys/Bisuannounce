@@ -238,11 +238,6 @@
         });
 
         document.getElementById("closeLogin").addEventListener("click", () => {
-            if (!isAdmin()) {
-                App.ui.showNotification("🔐 Please login to access the system", "warning");
-                return;
-            }
-
             document.getElementById("loginModal").classList.remove("is-open");
             document.getElementById("username").value = "";
             document.getElementById("password").value = "";
@@ -365,9 +360,10 @@
         await refreshData();
 
         if (!isAdmin()) {
-            mainEl.classList.add("locked");
-            loginModal.classList.add("is-open");
-            authButtons.hidden = true;
+            mainEl.classList.remove("locked");
+            loginModal.classList.remove("is-open");
+            authButtons.hidden = false;
+            toggleAdminMode(false);
         } else {
             mainEl.classList.remove("locked");
             loginModal.classList.remove("is-open");
@@ -380,3 +376,4 @@
         }
     });
 })();
+
